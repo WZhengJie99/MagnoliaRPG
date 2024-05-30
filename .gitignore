@@ -1,0 +1,11 @@
+# Ignore the .vscode directory
+.vscode/
+
+# Ignore object files, binaries, and other generated files
+*.o
+MagnoliaRPG
+*.exe
+*.out
+
+# Ignore build artifacts
+build/
