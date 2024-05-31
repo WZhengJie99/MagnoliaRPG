@@ -4,20 +4,19 @@
 #include <string>
 
 class Character {
+public:
+    Character(const std::string& name, int health, int mana, int attackPower);
+    void attack(Character& target);
+    void display() const;
+    bool isAlive() const;
+    std::string getName() const;
+
 protected:
     std::string name;
     int health;
+    int mana;
     int attackPower;
-
-public:
-    Character(const std::string& name, int health, int attackPower);
-
-    void attack(Character& target);
-    void display() const;
-
-    bool isAlive() const;
-    
-    std::string getName() const;
 };
 
-#endif // CHARACTER_H
+#endif
+

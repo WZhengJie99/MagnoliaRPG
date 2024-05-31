@@ -1,8 +1,8 @@
 #include "character.h"
 #include <iostream>
 
-Character::Character(const std::string& name, int health, int attackPower)
-    : name(name), health(health), attackPower(attackPower) {}
+Character::Character(const std::string& name, int health, int mana, int attackPower)
+    : name(name), health(health), mana(mana), attackPower(attackPower) {}
 
 void Character::attack(Character& target) {
     target.health -= attackPower;
@@ -10,13 +10,13 @@ void Character::attack(Character& target) {
 }
 
 void Character::display() const {
-    std::cout << name << " - Health: " << health << ", Attack Power: " << attackPower << std::endl;
+    std::cout << name << " - Health: " << health << ", Mana: " << mana << ", Attack Power: " << attackPower << std::endl;
 }
 
 bool Character::isAlive() const {
     return health > 0;
 }
 
-std::string Character::getName() const {  // Implement this method
+std::string Character::getName() const {
     return name;
 }

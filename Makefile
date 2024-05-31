@@ -27,6 +27,6 @@ $(TARGET): $(OBJS)
 
 # Clean target to remove built files
 clean:
-	rm -f $(OBJS) $(TARGET)
+	del /Q $(subst /,\,$(OBJS)) $(subst /,\,$(TARGET))
 
 .PHONY: all clean

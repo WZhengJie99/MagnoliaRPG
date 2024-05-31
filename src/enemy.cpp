@@ -1,4 +1,4 @@
 #include "enemy.h"
 
-Enemy::Enemy(const std::string& name, int health, int attackPower)
-    : Character(name, health, attackPower) {}
+Enemy::Enemy(const std::string& name, int health, int mana, int attackPower)
+    : Character(name, health, mana, attackPower) {}

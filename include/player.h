@@ -6,14 +6,16 @@
 #include <string>
 
 class Player : public Character {
-private:
-    std::vector<std::string> inventory;
-
 public:
-    Player(const std::string& name, int health, int attackPower);
-
+    Player(const std::string& name, int health, int mana, int attackPower);
     void addItem(const std::string& item);
     void displayInventory() const;
+    void useItem(const std::string& item);
+    const std::vector<std::string>& getInventory() const;
+
+private:
+    std::vector<std::string> inventory;
 };
 
-#endif // PLAYER_H
+#endif
+

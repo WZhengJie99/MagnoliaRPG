@@ -7,14 +7,18 @@
 
 class Menu {
 public:
-    Menu(Player& player, Enemy& enemy);
+    Menu(Player& player);
     void displayMenu();
-    void startBattle();
     void viewStats();
+    void viewInventory();
+    void startBattle();
+    void addItemToPlayer(const std::string& item);
+    void useItem();
 
 private:
     Player& player;
-    Enemy& enemy;
+    Enemy* enemy;
+    void createEnemy();
 };
 
-#endif // MENU_H
+#endif
