@@ -112,7 +112,9 @@ void Menu::createEnemy() {
     int randomEnemy = std::rand() % 2;
     if (randomEnemy == 0) {
         enemy = new Enemy("Goblin", 50, 0, 10);
+    } else if (randomEnemy == 1){
+        enemy = new Enemy("Green Slime", 20, 0, 5);
     } else {
-        enemy = new Enemy("Slime", 20, 0, 5);
+        enemy = new Enemy("Blue Slime", 20, 0, 5);
     }
 }
