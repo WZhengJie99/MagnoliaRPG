@@ -13,7 +13,8 @@ Menu::Menu(Player& player) : player(player), enemy(nullptr) {
 void Menu::displayMenu() {
     int choice;
     do {
-        std::cout << "========= RPG Menu =========" << std::endl;
+        std::cout << "===================================" << std::endl;
+        std::cout << "============ RPG Menu =============" << std::endl;
         std::cout << "Location: " << player.getLocation().getName() << std::endl;
         std::cout << "1. View Stats" << std::endl;
         std::cout << "2. View Inventory" << std::endl;
@@ -57,7 +58,8 @@ void Menu::displayMenu() {
 }
 
 void Menu::viewStats() {
-    std::cout << "======= Player Stats =======" << std::endl;
+    std::cout << "===================================" << std::endl;
+    std::cout << "=========== Player Stats ==========" << std::endl;
     player.display();
 }
 
@@ -67,7 +69,8 @@ void Menu::viewInventory() {
 
 void Menu::startBattle() {
     createEnemy();
-    std::cout << "======= Battle Start! ======" << std::endl;
+    std::cout << "===================================" << std::endl;
+    std::cout << "=========== Battle Start! =========" << std::endl;
 
     while (player.isAlive() && enemy->isAlive()) {
         player.attack(*enemy);
@@ -100,7 +103,8 @@ void Menu::useItem() {
         return;
     }
 
-    std::cout << "== Choose an item to use: ==" << std::endl;
+    std::cout << "===================================" << std::endl;
+    std::cout << "====== Choose an item to use: =====" << std::endl;
     for (size_t i = 0; i < inventory.size(); ++i) {
         std::cout << (i + 1) << ". " << inventory[i] << std::endl;
     }
@@ -121,10 +125,11 @@ void Menu::useItem() {
 }
 
 void Menu::travel() {
+    std::cout << "===================================" << std::endl;
     std::cout << "Choose a new location to travel to:" << std::endl;
-    std::cout << "1. Magnolia Town (Goblin, Green Slime)" << std::endl;
-    std::cout << "2. Dark Forest (Werewolf, Vampire)" << std::endl;
-    std::cout << "3. Crystal Cave (Crystal Golem, Cave Bat)" << std::endl;
+    std::cout << "1. Magnolia Town" << std::endl;
+    std::cout << "2. Dark Forest" << std::endl;
+    std::cout << "3. Crystal Cave" << std::endl;
 
     int choice;
     std::cout << "Enter your choice: ";
@@ -155,6 +160,7 @@ void Menu::createEnemy() {
     int randomIndex = std::rand() % monsters.size();
     std::string enemyName = monsters[randomIndex];
 
+    // name, health, mana, attackPower
     if (enemyName == "Goblin") {
         enemy = new Enemy("Goblin", 50, 0, 10);
     } else if (enemyName == "Green Slime") {

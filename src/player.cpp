@@ -12,7 +12,8 @@ void Player::addItem(const std::string& item) {
 }
 
 void Player::displayInventory() const {
-    std::cout << "===== " << name << "'s Inventory =====" << std::endl;
+    std::cout << "===================================" << std::endl;
+    std::cout << "========= " << name << "'s Inventory ========" << std::endl;
     for (const auto& item : inventory) {
         std::cout << "- " << item << std::endl;
     }
