@@ -1,4 +1,4 @@
-// Menu.h
+// menu.h
 #ifndef MENU_H
 #define MENU_H
 
@@ -9,16 +9,17 @@ class Menu {
 public:
     Menu(Player& player);
     void displayMenu();
+private:
     void viewStats();
     void viewInventory();
     void startBattle();
-    void addItemToPlayer(const std::string& item);
     void useItem();
+    void travel();  // Add the declaration here
+    void createEnemy();
+    void addItemToPlayer(const std::string& item);
 
-private:
     Player& player;
     Enemy* enemy;
-    void createEnemy();
 };
 
-#endif
+#endif // MENU_H

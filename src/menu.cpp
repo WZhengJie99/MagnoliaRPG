@@ -1,8 +1,10 @@
-// Menu.cpp
+// menu.cpp
 #include "menu.h"
+#include "location.h"
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
+#include <limits>
 
 Menu::Menu(Player& player) : player(player), enemy(nullptr) {
     std::srand(std::time(0)); // Seed the random number generator
@@ -12,13 +14,21 @@ void Menu::displayMenu() {
     int choice;
     do {
         std::cout << "========= RPG Menu =========" << std::endl;
+        std::cout << "Location: " << player.getLocation().getName() << std::endl;
         std::cout << "1. View Stats" << std::endl;
         std::cout << "2. View Inventory" << std::endl;
         std::cout << "3. Start Battle" << std::endl;
         std::cout << "4. Use Item" << std::endl;
-        std::cout << "5. Exit" << std::endl;
+        std::cout << "5. Travel to New Location" << std::endl;
+        std::cout << "6. Exit" << std::endl;
         std::cout << "Enter your choice: ";
-        std::cin >> choice;
+
+        // Input validation
+        while (!(std::cin >> choice)) {
+            std::cout << "Invalid input. Please enter a number between 1 and 6: ";
+            std::cin.clear(); // clear the error flag on cin
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // discard invalid input
+        }
 
         switch (choice) {
             case 1:
@@ -34,13 +44,16 @@ void Menu::displayMenu() {
                 useItem();
                 break;
             case 5:
+                travel();
+                break;
+            case 6:
                 std::cout << "Exiting the game. Goodbye!" << std::endl;
                 break;
             default:
                 std::cout << "Invalid choice. Please try again." << std::endl;
                 break;
         }
-    } while (choice != 5);
+    } while (choice != 6);
 }
 
 void Menu::viewStats() {
@@ -65,11 +78,7 @@ void Menu::startBattle() {
 
     if (player.isAlive()) {
         std::cout << player.getName() << " has defeated " << enemy->getName() << "!" << std::endl;
-        if (enemy->getName() == "Goblin") {
-            addItemToPlayer("Health Potion");
-        } else if (enemy->getName() == "Slime") {
-            addItemToPlayer("Mana Potion");
-        }
+        addItemToPlayer("Potion"); // Example item, you can expand this
     } else {
         std::cout << player.getName() << " has been defeated by " << enemy->getName() << "..." << std::endl;
     }
@@ -98,7 +107,11 @@ void Menu::useItem() {
 
     int choice;
     std::cout << "Enter your choice: ";
-    std::cin >> choice;
+    while (!(std::cin >> choice)) {
+        std::cout << "Invalid input. Please enter a valid item number: ";
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    }
 
     if (choice > 0 && choice <= static_cast<int>(inventory.size())) {
         player.useItem(inventory[choice - 1]);
@@ -107,14 +120,52 @@ void Menu::useItem() {
     }
 }
 
+void Menu::travel() {
+    std::cout << "Choose a new location to travel to:" << std::endl;
+    std::cout << "1. Magnolia Town (Goblin, Green Slime)" << std::endl;
+    std::cout << "2. Dark Forest (Werewolf, Vampire)" << std::endl;
+    std::cout << "3. Crystal Cave (Crystal Golem, Cave Bat)" << std::endl;
+
+    int choice;
+    std::cout << "Enter your choice: ";
+    while (!(std::cin >> choice)) {
+        std::cout << "Invalid input. Please enter a number between 1 and 3: ";
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    }
+
+    switch (choice) {
+        case 1:
+            player.setLocation(Location("Magnolia Town", {"Goblin", "Green Slime"}));
+            break;
+        case 2:
+            player.setLocation(Location("Dark Forest", {"Werewolf", "Vampire"}));
+            break;
+        case 3:
+            player.setLocation(Location("Crystal Cave", {"Crystal Golem", "Cave Bat"}));
+            break;
+        default:
+            std::cout << "Invalid choice. Staying in current location." << std::endl;
+            break;
+    }
+}
+
 void Menu::createEnemy() {
-    // Randomly create an enemy
-    int randomEnemy = std::rand() % 2;
-    if (randomEnemy == 0) {
+    const std::vector<std::string>& monsters = player.getLocation().getMonsters();
+    int randomIndex = std::rand() % monsters.size();
+    std::string enemyName = monsters[randomIndex];
+
+    if (enemyName == "Goblin") {
         enemy = new Enemy("Goblin", 50, 0, 10);
-    } else if (randomEnemy == 1){
+    } else if (enemyName == "Green Slime") {
         enemy = new Enemy("Green Slime", 20, 0, 5);
-    } else {
-        enemy = new Enemy("Blue Slime", 20, 0, 5);
+    } else if (enemyName == "Werewolf") {
+        enemy = new Enemy("Werewolf", 80, 0, 15);
+    } else if (enemyName == "Vampire") {
+        enemy = new Enemy("Vampire", 70, 0, 20);
+    } else if (enemyName == "Crystal Golem") {
+        enemy = new Enemy("Crystal Golem", 100, 0, 25);
+    } else if (enemyName == "Cave Bat") {
+        enemy = new Enemy("Cave Bat", 30, 0, 10);
     }
 }

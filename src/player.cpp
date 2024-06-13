@@ -1,9 +1,10 @@
+// player.cpp
 #include "player.h"
 #include <iostream>
 #include <algorithm>
 
 Player::Player(const std::string& name, int health, int mana, int attackPower)
-    : Character(name, health, mana, attackPower) {}
+    : Character(name, health, mana, attackPower), currentLocation(Location("Magnolia Town", {"Goblin", "Green Slime"})) {}
 
 void Player::addItem(const std::string& item) {
     inventory.push_back(item);
@@ -37,3 +38,10 @@ const std::vector<std::string>& Player::getInventory() const {
     return inventory;
 }
 
+void Player::setLocation(const Location& location) {
+    currentLocation = location;
+}
+
+Location Player::getLocation() const {
+    return currentLocation;
+}
