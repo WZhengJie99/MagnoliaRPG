@@ -61,7 +61,7 @@ Upon running the game, you will be presented with a menu:
 2. View Inventory: Displays the player's Inventory.
 3. Start Battle: Initiates a battle between the player and the enemy.
 4. Use Item: Use an item in the player's Inventory.
-5. Travel to location: travel to a different place.
+5. Travel: Travel to a different place.
 6. Exit: Exits the game.
 
 <!-- 

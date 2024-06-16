@@ -20,7 +20,7 @@ void Menu::displayMenu() {
         std::cout << "2. View Inventory" << std::endl;
         std::cout << "3. Start Battle" << std::endl;
         std::cout << "4. Use Item" << std::endl;
-        std::cout << "5. Travel to New Location" << std::endl;
+        std::cout << "5. Travel" << std::endl;
         std::cout << "6. Exit" << std::endl;
         std::cout << "Enter your choice: ";
 
