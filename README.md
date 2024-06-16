@@ -51,16 +51,18 @@ If you're using Windows, you can install `make` via Chocolatey:
 
 Upon running the game, you will be presented with a menu:
 
-<p align="left">
-  <img src="https://github.com/WZhengJie99/MagnoliaRPG/assets/147889572/f9c71908-6922-4ebf-8534-7a1b1144ae84" alt="RPG Menu" width="20%" height="20%">
+<p align="center">
+  <img src="https://github.com/WZhengJie99/MagnoliaRPG/assets/147889572/f28ad8e4-fab4-4d1a-9c4b-3cbe7a6d1335" alt="RPG Menu" width="80%" height="80%">
 </p>
 
 
-* View Stats: Displays the player's stats.
-* View Inventory: Displays the player's Inventory
-* Start Battle: Initiates a battle between the player and the enemy.
-* Use Item: Use an item in the player's Inventory
-* Exit: Exits the game.
+
+1. View Stats: Displays the player's stats.
+2. View Inventory: Displays the player's Inventory.
+3. Start Battle: Initiates a battle between the player and the enemy.
+4. Use Item: Use an item in the player's Inventory.
+5. Travel to location: travel to a different place.
+6. Exit: Exits the game.
 
 <!-- 
 Compile the project with the 'g++ -Iinclude src/*.cpp -o MagnoliaRPG' command to ensure the compiler can find the header files.
