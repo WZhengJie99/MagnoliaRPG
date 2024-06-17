@@ -81,7 +81,10 @@ void Menu::startBattle() {
 
     if (player.isAlive()) {
         std::cout << player.getName() << " has defeated " << enemy->getName() << "!" << std::endl;
-        addItemToPlayer("Potion"); // Example item, you can expand this
+        int xp = enemy->getExperiencePoints();
+        player.gainExperience(xp);
+        std::string itemDrop = enemy->getItemDrop();
+        addItemToPlayer(itemDrop);
     } else {
         std::cout << player.getName() << " has been defeated by " << enemy->getName() << "..." << std::endl;
     }
@@ -91,6 +94,7 @@ void Menu::startBattle() {
 
     std::cout << "Returning to menu..." << std::endl;
 }
+
 
 void Menu::addItemToPlayer(const std::string& item) {
     player.addItem(item);
@@ -160,18 +164,19 @@ void Menu::createEnemy() {
     int randomIndex = std::rand() % monsters.size();
     std::string enemyName = monsters[randomIndex];
 
-    // name, health, mana, attackPower
+    // name, health, mana, attackPower, experiencePoints, itemDrop
     if (enemyName == "Goblin") {
-        enemy = new Enemy("Goblin", 50, 0, 10);
+        enemy = new Enemy("Goblin", 50, 0, 10, 50, "Health Potion");
     } else if (enemyName == "Green Slime") {
-        enemy = new Enemy("Green Slime", 20, 0, 5);
+        enemy = new Enemy("Green Slime", 20, 0, 5, 20, "Mana Potion");
     } else if (enemyName == "Werewolf") {
-        enemy = new Enemy("Werewolf", 80, 0, 15);
+        enemy = new Enemy("Werewolf", 80, 0, 15, 100, "Health Potion");
     } else if (enemyName == "Vampire") {
-        enemy = new Enemy("Vampire", 70, 0, 20);
+        enemy = new Enemy("Vampire", 70, 0, 20, 120, "Health Potion");
     } else if (enemyName == "Crystal Golem") {
-        enemy = new Enemy("Crystal Golem", 100, 0, 25);
+        enemy = new Enemy("Crystal Golem", 100, 0, 25, 150, "Mana Potion");
     } else if (enemyName == "Cave Bat") {
-        enemy = new Enemy("Cave Bat", 30, 0, 10);
+        enemy = new Enemy("Cave Bat", 30, 0, 10, 40, "Health Potion");
     }
 }
+
