@@ -4,19 +4,17 @@
 #include <algorithm>
 
 Player::Player(const std::string& name, int health, int mana, int attackPower)
-    : Character(name, health, mana, attackPower), currentLocation(Location("Magnolia Town", {"Goblin", "Green Slime"})),
-      experience(0), level(1) {}
+    : Character(name, health, mana, attackPower), currentLocation(Location("Magnolia Town", {"Goblin", "Green Slime"})), coins(0) {}
 
 void Player::addItem(const std::string& item) {
     inventory.push_back(item);
     std::cout << item << " added to inventory." << std::endl;
 }
 
-void Player::displayInventory() const {
-    std::cout << "===================================" << std::endl;
-    std::cout << "========= " << name << "'s Inventory ========" << std::endl;
-    for (const auto& item : inventory) {
-        std::cout << "- " << item << std::endl;
+void Player::removeItem(const std::string& item) {
+    auto it = std::find(inventory.begin(), inventory.end(), item);
+    if (it != inventory.end()) {
+        inventory.erase(it);
     }
 }
 
@@ -36,6 +34,15 @@ void Player::useItem(const std::string& item) {
     }
 }
 
+void Player::displayInventory() const {
+    std::cout << "===================================" << std::endl;
+    std::cout << "========= " << name << "'s Inventory ========" << std::endl;
+    for (const auto& item : inventory) {
+        std::cout << "- " << item << std::endl;
+    }
+    std::cout << "Coins: " << coins << std::endl;
+}
+
 const std::vector<std::string>& Player::getInventory() const {
     return inventory;
 }
@@ -50,30 +57,13 @@ Location Player::getLocation() const {
 
 void Player::gainExperience(int xp) {
     experience += xp;
-    std::cout << name << " gained " << xp << " experience points." << std::endl;
-    while (experience >= calculateExperienceForNextLevel()) {
-        levelUp();
-    }
+    // Implement leveling up logic here
 }
 
-int Player::getExperience() const {
-    return experience;
+void Player::setCoins(int coins) {
+    this->coins = coins;
 }
 
-int Player::getLevel() const {
-    return level;
-}
-
-void Player::levelUp() {
-    experience -= calculateExperienceForNextLevel();
-    level++;
-    health += 10; // Increase health upon leveling up
-    mana += 10;   // Increase mana upon leveling up
-    attackPower += 2; // Increase attack power upon leveling up
-    std::cout << name << " leveled up! Now at level " << level << "." << std::endl;
-    std::cout << "Stats increased: Health, Mana, Attack Power." << std::endl;
-}
-
-int Player::calculateExperienceForNextLevel() const {
-    return level * 100; // Example formula: next level requires current level * 100 XP
+int Player::getCoins() const {
+    return coins;
 }

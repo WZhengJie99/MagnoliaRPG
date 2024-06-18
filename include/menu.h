@@ -17,6 +17,7 @@ private:
     void travel();  // Add the declaration here
     void createEnemy();
     void addItemToPlayer(const std::string& item);
+    void openMarket();
 
     Player& player;
     Enemy* enemy;

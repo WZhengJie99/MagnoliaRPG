@@ -1,6 +1,7 @@
 // menu.cpp
 #include "menu.h"
 #include "location.h"
+#include "market.h"
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
@@ -18,10 +19,11 @@ void Menu::displayMenu() {
         std::cout << "Location: " << player.getLocation().getName() << std::endl;
         std::cout << "1. View Stats" << std::endl;
         std::cout << "2. View Inventory" << std::endl;
-        std::cout << "3. Start Battle" << std::endl;
-        std::cout << "4. Use Item" << std::endl;
-        std::cout << "5. Travel" << std::endl;
-        std::cout << "6. Exit" << std::endl;
+        std::cout << "3. Go to Market" << std::endl;
+        std::cout << "4. Start Battle" << std::endl;
+        std::cout << "5. Use Item" << std::endl;
+        std::cout << "6. Travel" << std::endl;
+        std::cout << "7. Exit" << std::endl;
         std::cout << "Enter your choice: ";
 
         // Input validation
@@ -39,22 +41,25 @@ void Menu::displayMenu() {
                 viewInventory();
                 break;
             case 3:
-                startBattle();
+                openMarket();
                 break;
             case 4:
-                useItem();
+                startBattle();
                 break;
             case 5:
-                travel();
+                useItem();
                 break;
             case 6:
+                travel();
+                break;
+            case 7:
                 std::cout << "Exiting the game. Goodbye!" << std::endl;
                 break;
             default:
                 std::cout << "Invalid choice. Please try again." << std::endl;
                 break;
         }
-    } while (choice != 6);
+    } while (choice != 7);
 }
 
 void Menu::viewStats() {
@@ -156,6 +161,40 @@ void Menu::travel() {
         default:
             std::cout << "Invalid choice. Staying in current location." << std::endl;
             break;
+    }
+}
+
+void Menu::openMarket() {
+    Market market;
+    while (true) {
+        market.displayItems();
+        std::cout << "===================================" << std::endl;
+        std::cout << "1. Buy Item" << std::endl;
+        std::cout << "2. Sell Item" << std::endl;
+        std::cout << "3. Return to Main Menu" << std::endl;
+        std::cout << "Choose an option: ";
+        int choice;
+        std::cin >> choice;
+
+        if (choice == 3) {
+            break;
+        }
+
+        std::string item;
+        switch (choice) {
+            case 1:
+                std::cout << "Enter item to buy: ";
+                std::cin >> item;
+                market.buyItem(player, item);
+                break;
+            case 2:
+                std::cout << "Enter item to sell: ";
+                std::cin >> item;
+                market.sellItem(player, item);
+                break;
+            default:
+                std::cout << "Invalid choice. Please try again." << std::endl;
+        }
     }
 }
 
